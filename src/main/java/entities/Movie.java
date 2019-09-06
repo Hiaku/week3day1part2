@@ -130,35 +130,4 @@ public class Movie implements Serializable {
     public void setStock(long stock) {
         this.stock = stock;
     }
-    
-    // TODO, delete this class, or rename to an Entity class that makes sense for what you are about to do
-    // Delete EVERYTHING below if you decide to use this class, it's dummy data used for the initial demo
-//    private String dummyStr1;
-//    private String dummyStr2;
-//
-//    public Movie(String dummyStr1, String dummyStr2) {
-//        this.dummyStr1 = dummyStr1;
-//        this.dummyStr2 = dummyStr2;
-//    }
-//
-//    public String getDummyStr1() {
-//        return dummyStr1;
-//    }
-//
-//    public void setDummyStr1(String dummyStr1) {
-//        this.dummyStr1 = dummyStr1;
-//    }
-//
-//    public String getDummyStr2() {
-//        return dummyStr2;
-//    }
-//
-//    public void setDummyStr2(String dummyStr2) {
-//        this.dummyStr2 = dummyStr2;
-//    }
-    
-    
-    
-
-   
 }

@@ -12,9 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import utils.Settings;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
@@ -30,23 +28,6 @@ public class MovieFacadeTest {
     public MovieFacadeTest() {
     }
 
-    //@BeforeAll
-//    public static void setUpClass() {
-//        emf = EMF_Creator.createEntityManagerFactory(
-//                "pu",
-//                "jdbc:mysql://localhost:3307/movie_test",
-//                "dev",
-//                "ax2",
-//                EMF_Creator.Strategy.CREATE);
-//        facade = MovieFacade.getMovieFacade(emf);
-//    }
-
-    /*   **** HINT **** 
-        A better way to handle configuration values, compared to the UNUSED example above, is to store those values
-        ONE COMMON place accessible from anywhere.
-        The file config.properties and the corresponding helper class utils.Settings is added just to do that. 
-        See below for how to use these files. This is our RECOMENDED strategy
-     */
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
@@ -78,13 +59,6 @@ public class MovieFacadeTest {
     public void tearDown() {
     }
 
-//    @Test
-//    public void testAFacadeMethod() throws Exception {
-//        assertEquals(1, facade.getAllMoviesCount(), "Expects one row in the database");
-//    }
-    
-    // Error Within disabled
-//    @Disabled
     @Test
     public void testGetMovieByName() throws Exception{
         // What we expect to see
@@ -105,8 +79,6 @@ public class MovieFacadeTest {
         assertEquals(expected, result);
     }
     
-    // Error within
-//    @Disabled
     @org.junit.jupiter.api.Test
     public void testGetListOfMoviesByDirector(){
         //
@@ -120,8 +92,6 @@ public class MovieFacadeTest {
         assertEquals(expected, result);
     }
 
-    // Error within
-//    @Disabled
     @org.junit.jupiter.api.Test
     public void testGetListOfMoviesByYear(){
         //
@@ -133,8 +103,6 @@ public class MovieFacadeTest {
         assertEquals(expected, result);
     }
     
-    //Error within 
-//    @Disabled
     @org.junit.jupiter.api.Test
     public void testGetAllMovies(){
         //
