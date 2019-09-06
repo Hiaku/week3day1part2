@@ -12,6 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utils.Settings;
 import utils.EMF_Creator.DbSelector;
@@ -30,15 +31,15 @@ public class MovieFacadeTest {
     }
 
     //@BeforeAll
-    public static void setUpClass() {
-        emf = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/movie_test",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
-        facade = MovieFacade.getMovieFacade(emf);
-    }
+//    public static void setUpClass() {
+//        emf = EMF_Creator.createEntityManagerFactory(
+//                "pu",
+//                "jdbc:mysql://localhost:3307/movie_test",
+//                "dev",
+//                "ax2",
+//                EMF_Creator.Strategy.CREATE);
+//        facade = MovieFacade.getMovieFacade(emf);
+//    }
 
     /*   **** HINT **** 
         A better way to handle configuration values, compared to the UNUSED example above, is to store those values
@@ -47,23 +48,22 @@ public class MovieFacadeTest {
         See below for how to use these files. This is our RECOMENDED strategy
      */
     @BeforeAll
-    public static void setUpClassV2() {
+    public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = MovieFacade.getMovieFacade(emf);
     }
 
     @AfterAll
     public static void tearDownClass() {
-//        Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
     }
 
     // Setup the DataBase in a known state BEFORE EACH TEST
     //TODO -- Make sure to change the script below to use YOUR OWN entity class
     @BeforeEach
     public void setUp() {
-        EntityManager em = emf.createEntityManager();
+        facade = MovieFacade.getMovieFacade(emf);
         lion = new Movie(1978, "Lion King", "Lion cup", "Disney", 5);
         movies.add(lion);
+        EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.createNativeQuery("DELETE FROM MOVIE").executeUpdate();
@@ -76,15 +76,15 @@ public class MovieFacadeTest {
 
     @AfterEach
     public void tearDown() {
-//        Remove any data after each test was run
     }
 
-    // TODO: Delete or change this method 
-    @Test
-    public void testAFacadeMethod() throws Exception {
-        assertEquals(1, facade.getAllMoviesCount(), "Expects one row in the database");
-    }
+//    @Test
+//    public void testAFacadeMethod() throws Exception {
+//        assertEquals(1, facade.getAllMoviesCount(), "Expects one row in the database");
+//    }
     
+    // Error Within disabled
+//    @Disabled
     @Test
     public void testGetMovieByName() throws Exception{
         // What we expect to see
@@ -105,10 +105,13 @@ public class MovieFacadeTest {
         assertEquals(expected, result);
     }
     
+    // Error within
+//    @Disabled
     @org.junit.jupiter.api.Test
     public void testGetListOfMoviesByDirector(){
         //
-        MovieDTO expected = new MovieDTO(lion);
+        List<MovieDTO> expected = new ArrayList<>();
+        expected.add(new MovieDTO(lion));
         System.out.println(expected.toString());
         //
         List<MovieDTO> result = facade.getAllMovies();
@@ -117,16 +120,21 @@ public class MovieFacadeTest {
         assertEquals(expected, result);
     }
 
+    // Error within
+//    @Disabled
     @org.junit.jupiter.api.Test
     public void testGetListOfMoviesByYear(){
         //
-        MovieDTO expected = new MovieDTO(lion);
+        List<MovieDTO> expected = new ArrayList<>();
+        expected.add(new MovieDTO(lion));
         //
         List<MovieDTO> result = facade.getListOfMoviesByYear(1978);
         //
         assertEquals(expected, result);
     }
     
+    //Error within 
+//    @Disabled
     @org.junit.jupiter.api.Test
     public void testGetAllMovies(){
         //

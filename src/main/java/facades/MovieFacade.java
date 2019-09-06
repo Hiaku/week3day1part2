@@ -55,7 +55,7 @@ public class MovieFacade {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<MovieDTO> mbyyear
-                    = em.createQuery("SELECT m FROM Movie m WHERE m.year = :year", MovieDTO.class).setParameter("year", year);
+                    = em.createQuery("SELECT new dto.MovieDTO(m) FROM Movie m WHERE m.year = :year", MovieDTO.class).setParameter("year", year);
             return mbyyear.getResultList();
         } finally {
             em.close();
@@ -65,7 +65,7 @@ public class MovieFacade {
     
     //Returns a list of all movies and everything
     public List<MovieDTO> getAllMovies(){
-        EntityManager em = getEntityManager();
+        EntityManager em = emf.createEntityManager();
         try {
             List<Movie> movies = em.createNamedQuery("Movie.getAll").getResultList();
             List<MovieDTO> result = new ArrayList<>();
@@ -84,8 +84,8 @@ public class MovieFacade {
         try {
             return em.createQuery("SELECT new dto.MovieDTO(m) FROM Movie m WHERE m.name = :name", MovieDTO.class).setParameter("name", name).getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("No customer found by that name");
+            System.out.println(e);
+            throw new Exception("No movie found by that name");
         } finally {
             em.close();
         }

@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,12 +37,52 @@ public class Movie implements Serializable {
         this.director = director;
         this.stock = stock;
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.year;
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.actors);
+        hash = 79 * hash + Objects.hashCode(this.director);
+        hash = 79 * hash + (int) (this.stock ^ (this.stock >>> 32));
+        return hash;
+    }
 
 //    public Movie(int year, String name) {
 //        this.year = year;
 //        this.name = name;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Movie other = (Movie) obj;
+        if (this.year != other.year) {
+            return false;
+        }
+        if (this.stock != other.stock) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.actors, other.actors)) {
+            return false;
+        }
+        if (!Objects.equals(this.director, other.director)) {
+            return false;
+        }
+        return true;
+    }
+
 //    }
-        
     public Long getId() {
         return id;
     }

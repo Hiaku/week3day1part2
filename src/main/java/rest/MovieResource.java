@@ -3,15 +3,11 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.MovieDTO;
-import entities.Movie;
 import utils.EMF_Creator;
 import facades.MovieFacade;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -66,7 +62,11 @@ public class MovieResource {
     @Path("/name/{name}")
     @Produces({MediaType.APPLICATION_JSON})
     public String getMovieByName(@PathParam("name") String name) {
-        return GSON.toJson(FACADE.getMovieByName(name));
+        try {
+            return GSON.toJson(FACADE.getMovieByName(name));
+        } catch (Exception ex) {
+            return "{\"errormessage\":\"Movie does not exist\"}";
+        }
     }
     
     @GET
