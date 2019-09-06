@@ -130,11 +130,16 @@ public class MovieResourceTest {
     }
     
     //5
+    /**
+     * Get single movie as DTO
+     * @param id
+     * @return 
+     */
     @Test
     public void testGetMovieById() throws Exception{
         given().
                 contentType("application/json").
-                get("/movie/{id}", 1).
+                get("/movie/{id}", movie1.getId()).
         then().log().body().assertThat().
                 statusCode(HttpStatus.OK_200.getStatusCode()).
                 body("name", equalTo(movie1.getName()));

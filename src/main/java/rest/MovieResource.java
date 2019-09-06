@@ -19,7 +19,7 @@ public class MovieResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/startcode",
+                "jdbc:mysql://localhost:3307/movie",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
@@ -77,10 +77,10 @@ public class MovieResource {
         return GSON.toJson(movies);
     }
     
-    @GET
     @Path("/{id}")
+    @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getMovieById(@PathParam("id") int id){
+    public String getMovieDTOById(@PathParam("id") int id) {
         return GSON.toJson(FACADE.getMovieById(new Long(id)));
     }
 }
